@@ -3,7 +3,6 @@
 use App\Category;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
-use App\Models\Post;
 
 class CategoriesTableSeeder extends Seeder
 {

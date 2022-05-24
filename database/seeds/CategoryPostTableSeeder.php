@@ -14,15 +14,11 @@ class CategoryPostTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $category_id = Category::pluck('id')->toArray();
+        $category_ids = Category::pluck('id')->toArray();
 
         $posts = Post::all();
         foreach($posts as $post){
-            $post->categories()
-            ->sync(
-            $faker->randomElement($category_id)->unique(),
-            $faker->randomElement($category_id)->unique()
-            );
+            $post->categories()->sync($faker->randomElement($category_ids, 2));
         }
     }
 }
