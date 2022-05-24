@@ -17,6 +17,12 @@
                 @foreach ($posts as $post)
 
                         <div class="card mb-2 p-3 mx-2" style="width: 18rem;">
+                            <div class="text-center">
+                                @foreach ($post->categories as $category )
+                                <p style="background-color: {{ $category->color }}" class="p-3  text-white badge" >Categoria: {{ $category->name }}</p>
+
+                                @endforeach
+                            </div>
                             <img src="{{$post->image_url}}" class="card-img-top" alt="{{$post->title}}">
                             <div class="card-body">
                                 <h5 class="card-title text-capitalize">{{$post->title}}</h5>

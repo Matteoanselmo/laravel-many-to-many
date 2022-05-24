@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -74,7 +75,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -92,6 +94,7 @@ class PostController extends Controller
         $post->description = $data['description'];
         $post->image_url = $data['image_url'];
         $post->slug = Str::slug($post->title . '-');
+        $post->categories()->sync($data['category']);
         $post->save();
         return redirect()->route('andim.posts.show', $post)->with('message', 'Post modificato con successo');
     }
